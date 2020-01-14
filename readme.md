@@ -70,16 +70,16 @@ syswatch package 遵循 LGPLv2.1 许可。
 
 ### 4.1模式0测试示例
 
-![](figures\syswatch_test_mode_0.JPG)
+![syswatch_test_mode_0.JPG](/figures/syswatch_test_mode_0.JPG)
 
 ### 4.2模式1测试示例
 
-![](figures\syswatch_test_mode_1.JPG)
+![syswatch_test_mode_1.JPG](/figures/syswatch_test_mode_1.JPG)
 
 ### 4.3模式2测试示例
 
-![](figures\syswatch_test_mode_2_1.JPG)
-![](figures\syswatch_test_mode_2_2.JPG)
+![syswatch_test_mode_2_1.JPG](/figures/syswatch_test_mode_2_1.JPG)
+![syswatch_test_mode_2_2.JPG](/figures/syswatch_test_mode_2_2.JPG)
 
 
 
