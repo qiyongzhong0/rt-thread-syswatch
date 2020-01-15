@@ -81,6 +81,9 @@ syswatch package 遵循 LGPLv2.1 许可。
 ![syswatch_test_mode_2_1.JPG](figures/syswatch_test_mode_2_1.JPG)
 ![syswatch_test_mode_2_2.JPG](figures/syswatch_test_mode_2_2.JPG)
 
+## 5. 联系方式
 
+* 维护：qiyongzhong
+* 主页：https://github.com/qiyongzhong0/rt-thread-syswatch
 
 
