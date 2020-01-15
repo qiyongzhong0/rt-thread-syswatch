@@ -15,14 +15,14 @@
 
 #include <rtconfig.h>
 
-#define RT_USING_SYSWATCH
-#define RT_USING_SYSWATCH_TEST
+//#define PKG_USING_SYSWATCH
+//#define PKG_USING_SYSWATCH_TEST
 
-#ifdef RT_USING_SYSWATCH
+#ifdef PKG_USING_SYSWATCH
 
 #define SYSWATCH_USING
 
-#ifdef RT_USING_SYSWATCH_TEST
+#ifdef PKG_USING_SYSWATCH_TEST
 #define SYSWATCH_TEST_USING
 #endif
 
@@ -67,7 +67,7 @@
 #define SYSWATCH_WDT_TIMEOUT            5//timeout of watchdog device used
 #endif
 
-#endif  //RT_USING_SYSWATCH
+#endif  //PKG_USING_SYSWATCH
 
 #endif  //__SYSWATCH_CONFIG_H__
 
