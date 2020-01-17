@@ -10,18 +10,27 @@
 
 **系统看守(syswatch)组件** 使用实时操作系统中允许的最高优先级作为看守线程的优先级，保障看守线程不会被阻塞，同时看守线程由看门狗提供看护，保障看守线程正常运行；系统看守通过 `线程调度回调接口` 监测线程的调度情况，当检测到有线程发生异常阻塞时，开始检测和确认具体哪个线程发生了异常阻塞，最后根据异常解决模式执行  `系统复位` / `杀掉阻塞线程` / `重启阻塞线程` 清除异常，使系统恢复正常运行。
 
-### 1.2文件组成
+### 1.2目录结构
 
-|文件|说明|
-|----|----|
-|syswatch_config.h|组件参数配置头文件，配置组件的使能、工作模式等工作参数|
-|syswatch.h|组件API接口头文件，定义了供用户使用的接口函数，以及参数定义等|
-|syswatch.c|组件的主功能模块，实现系统运行监测，线程异常识别，异常解决等功能|
-|syswatch_test.c|组件的测试功能模块，模拟异常线程，用于测试和验证组件功能|
+`syswatch` 软件包目录结构如下所示：
+
+``` 
+syswatch
+├───inc                             // 头文件目录
+│   |   syswatch.h                  // API 接口头文件
+│   └───syswatch_config.h           // 参数配置头文件
+├───src                             // 源码目录
+│   |   syswatch.c                  // 主功能模块
+│   └───syswatch_test.c             // 功能测试模块
+├───figures                         // 文档使用图片
+│   LICENSE                         // 软件包许可证
+│   README.md                       // 软件包使用说明
+└───SConscript                      // RT-Thread 默认的构建脚本
+```
 
 ### 1.3许可证
 
-syswatch package 遵循 LGPLv2.1 许可。
+syswatch package 遵循 LGPLv2.1 许可，详见 `LICENSE` 文件。
 
 ### 1.4依赖
 
@@ -34,12 +43,13 @@ syswatch package 遵循 LGPLv2.1 许可。
 ### 2.1获取组件
 
 - **方式1：**
-1.下载syswatch软件包，并将软件包`syswatch`文件夹复制到工程原码目录下
+1.下载[syswatch软件包](https://github.com/qiyongzhong0/rt-thread-syswatch)，并将软件包`syswatch`文件夹复制到工程原码目录下
 2.将软件包中syswatch.c和syswatch_test.c加入项目工程中
-3.将软件包中syswatch_config.h中 `RT_USING_SYSWATCH` 和 `RT_USING_SYSWATCH_TEST` 两个宏的注释去掉;并根据需要修改各项配置参数
+3.将软件包中syswatch_config.h中 `RT_USING_SYSWATCH` 和 `SYSWATCH_USING_TEST` 两个宏的注释去掉;并根据需要修改各项配置参数
 
 - **方式2：**
-通过 *Env配置工具* 或 *RT-Thread studio* 开启syswatch组件软件包，根据需要配置各项参数。
+通过 *Env配置工具* 或 *RT-Thread studio* 开启软件包，根据需要配置各项参数；配置路径为 *RT-Thread online packages -> system packages -> syswatch* 
+
 
 ### 2.2配置参数说明
 

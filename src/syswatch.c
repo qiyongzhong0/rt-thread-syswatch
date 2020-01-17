@@ -147,7 +147,7 @@ static void syswatch_thread_except_resolve_resume_from_msg(thread_msg_t * thread
     {
         rt_thread_init( thread_msg->thread, 
                         thread_msg->name, 
-                        thread_msg->entry, 
+                        (void (*)(void*))(thread_msg->entry), 
                         thread_msg->parameter, 
                         thread_msg->stack_addr, 
                         thread_msg->stack_size, 
@@ -161,7 +161,7 @@ static void syswatch_thread_except_resolve_resume_from_msg(thread_msg_t * thread
     else
     {
         rt_thread_t thread = rt_thread_create(  thread_msg->name, 
-                                                thread_msg->entry, 
+                                                (void (*)(void*))(thread_msg->entry),
                                                 thread_msg->parameter, 
                                                 thread_msg->stack_size, 
                                                 thread_msg->init_priority, 
