@@ -16,15 +16,11 @@
 #include <rtconfig.h>
 
 //#define PKG_USING_SYSWATCH
-//#define PKG_USING_SYSWATCH_TEST
+//#define SYSWATCH_USING_TEST
 
 #ifdef PKG_USING_SYSWATCH
 
 #define SYSWATCH_USING
-
-#ifdef PKG_USING_SYSWATCH_TEST
-#define SYSWATCH_TEST_USING
-#endif
 
 /* thread exception resolve mode:
  * 0--system reset
