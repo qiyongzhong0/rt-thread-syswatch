@@ -15,7 +15,7 @@
 #include <rtthread.h>
 #include <syswatch_config.h>
 
-#ifdef SYSWATCH_TEST_USING
+#ifdef SYSWATCH_USING_TEST
 
 #define DBG_TAG                     "syswatch_test"
 #define DBG_LVL                     DBG_LOG
