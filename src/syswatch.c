@@ -357,7 +357,7 @@ int syswatch_init(void)
 {
     rt_thread_t tid;
 
-    tid = rt_thread_create("syswatch", syswatch_thread_entry, RT_NULL,
+    tid = rt_thread_create(SYSWATCH_THREAD_NAME, syswatch_thread_entry, RT_NULL,
                            SYSWATCH_THREAD_STK_SIZE, SYSWATCH_THREAD_PRIO, 20);
     if (tid)
     {
