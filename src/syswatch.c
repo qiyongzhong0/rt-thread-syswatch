@@ -8,6 +8,7 @@
  * Change Logs:
  * Date           Author            Notes
  * 2020-01-08     qiyongzhong       first version
+ * 2020-05-08     qiyongzhong       optimized initialization operation 
  */
      
 #include <rtthread.h>
