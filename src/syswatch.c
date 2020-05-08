@@ -28,6 +28,7 @@
 #include <rtdbg.h>
 
 typedef struct{
+    rt_bool_t init_ok;
     rt_uint16_t sec_cnt;//time counter
     rt_uint16_t op_step;//opration step : 0--wait thread except, 1--check except thread
     syswatch_event_hook_t event_hook;
@@ -50,7 +51,7 @@ typedef struct thread_msg{
 }thread_msg_t;
 #endif
 
-static syswatch_data_t sw_data = {0,0,RT_NULL,RT_NULL,RT_NULL};
+static syswatch_data_t sw_data = {RT_FALSE,0,0,RT_NULL,RT_NULL,RT_NULL};
 
 static void syswatch_event_hook_call(syswatch_event_t eid, rt_thread_t except_thread)
 {
@@ -357,18 +358,23 @@ int syswatch_init(void)
 {
     rt_thread_t tid;
 
+    if(sw_data.init_ok)
+    {
+        return RT_EOK;
+    }
+
     tid = rt_thread_create(SYSWATCH_THREAD_NAME, syswatch_thread_entry, RT_NULL,
                            SYSWATCH_THREAD_STK_SIZE, SYSWATCH_THREAD_PRIO, 20);
-    if (tid)
-    {
-        rt_thread_startup(tid);
-    }
-    else
+    if (tid == RT_NULL)
     {
         LOG_E("create syswatch thread failed.");
         return -RT_ERROR;
     }
-
+    
+    LOG_I("create syswatch thread success.");
+    rt_thread_startup(tid);
+    sw_data.init_ok = RT_TRUE;
+    
     return RT_EOK;
 }
 INIT_COMPONENT_EXPORT(syswatch_init);
