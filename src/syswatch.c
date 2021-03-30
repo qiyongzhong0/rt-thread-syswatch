@@ -346,7 +346,7 @@ static void syswatch_thread_entry(void *parameter)
     }
 }
 
-void syswatch_sethook(syswatch_event_hook_t hook)
+void syswatch_set_event_hook(syswatch_event_hook_t hook)
 {
     sw_data.event_hook = hook;
 }
