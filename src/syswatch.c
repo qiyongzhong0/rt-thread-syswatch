@@ -43,7 +43,7 @@ typedef struct thread_msg{
     void * stack_addr;
     rt_uint32_t stack_size;
     rt_uint32_t init_tick;
-    rt_uint8_t init_priority;
+    rt_uint8_t priority;
     char name[RT_NAME_MAX];
 }thread_msg_t;
 #endif
@@ -130,7 +130,11 @@ static void syswatch_thread_except_resolve_resume_save_msg(rt_thread_t thread)
     thread_msg->stack_addr = thread->stack_addr;
     thread_msg->stack_size = thread->stack_size;
     thread_msg->init_tick = thread->init_tick;
-    thread_msg->init_priority= thread->init_priority;
+    #if (RTTHREAD_VERSION < 40100)
+    thread_msg->priority= thread->init_priority;
+    #else
+    thread_msg->priority= thread->current_priority;
+    #endif
     rt_strncpy(thread_msg->name, thread->name, RT_NAME_MAX);
 
     rt_slist_append(&(sw_data.wait_resume_slist), (rt_slist_t *)thread_msg);
@@ -149,12 +153,12 @@ static void syswatch_thread_except_resolve_resume_from_msg(thread_msg_t * thread
                         thread_msg->parameter, 
                         thread_msg->stack_addr, 
                         thread_msg->stack_size, 
-                        thread_msg->init_priority, 
+                        thread_msg->priority,
                         thread_msg->init_tick
                         );
         rt_thread_startup(thread_msg->thread);
         syswatch_event_hook_call(SYSWATCH_EVENT_THREAD_RESUMED, thread_msg->thread);
-        LOG_I("%.*s exception thread, priority = %d, successfully resumed", RT_NAME_MAX, thread_msg->name, thread_msg->init_priority);
+        LOG_I("%.*s exception thread, priority = %d, successfully resumed", RT_NAME_MAX, thread_msg->name, thread_msg->priority);
     }
     else
     {
@@ -162,18 +166,18 @@ static void syswatch_thread_except_resolve_resume_from_msg(thread_msg_t * thread
                                                 (void (*)(void*))(thread_msg->entry),
                                                 thread_msg->parameter, 
                                                 thread_msg->stack_size, 
-                                                thread_msg->init_priority, 
+                                                thread_msg->priority,
                                                 thread_msg->init_tick
                                                 );
         if (thread)
         {
             rt_thread_startup(thread);
             syswatch_event_hook_call(SYSWATCH_EVENT_THREAD_RESUMED, thread);
-            LOG_I("%.*s exception thread, priority = %d, successfully resumed", RT_NAME_MAX, thread_msg->name, thread_msg->init_priority);
+            LOG_I("%.*s exception thread, priority = %d, successfully resumed", RT_NAME_MAX, thread_msg->name, thread_msg->priority);
         }
         else
         {
-            LOG_E("%.*s exception thread, priority = %d, resume fail", RT_NAME_MAX, thread_msg->name, thread_msg->init_priority);
+            LOG_E("%.*s exception thread, priority = %d, resume fail", RT_NAME_MAX, thread_msg->name, thread_msg->priority);
         }
     }
 }
