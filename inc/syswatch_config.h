@@ -4,6 +4,7 @@
  * Change Logs:
  * Date           Author            Notes
  * 2020-01-10     qiyongzhong       first version
+ * 2022-10-27     qiyongzhong       fix SYSWATCH_THREAD_STK_SIZE to 1024
  */
      
 #ifndef __SYSWATCH_CONFIG_H__
@@ -44,7 +45,7 @@
 #endif
 
 #ifndef SYSWATCH_THREAD_STK_SIZE
-#define SYSWATCH_THREAD_STK_SIZE        512//stack size of system watcher
+#define SYSWATCH_THREAD_STK_SIZE        1024//stack size of system watcher
 #endif
 
 #ifndef SYSWATCH_THREAD_NAME
