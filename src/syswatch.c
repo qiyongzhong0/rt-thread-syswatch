@@ -376,12 +376,6 @@ static void syswatch_fsm(void)
 
 static void syswatch_thread_entry(void *parameter)
 {
-    if (syswatch_wdt_startup() != RT_EOK)
-    {
-        LOG_E("watch dog startup fail");
-        return;
-    }
-    
     LOG_I("system watch startup successfully");
     
     rt_slist_init(&(sw_data.wait_resume_slist));
@@ -407,6 +401,11 @@ int syswatch_init(void)
     if(sw_data.init_ok)
     {
         return RT_EOK;
+    }
+    if (syswatch_wdt_startup() != RT_EOK)
+    {
+        LOG_E("watch dog startup fail");
+        return -RT_ERROR;
     }
 
     tid = rt_thread_create(SYSWATCH_THREAD_NAME, syswatch_thread_entry, RT_NULL,
