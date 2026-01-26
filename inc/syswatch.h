@@ -23,6 +23,7 @@ typedef void ( * syswatch_event_hook_t)(syswatch_event_t eid, rt_thread_t except
 
 void syswatch_set_event_hook(syswatch_event_hook_t hook);//set syswatch event callback function
 int syswatch_init(void);//Initialize syswatch components 
+void syswatch_wdt_feed(void);
 
 #endif  //SYSWATCH_USING
 #endif  //__SYSWATCH_H__
