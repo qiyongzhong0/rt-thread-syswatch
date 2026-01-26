@@ -76,7 +76,7 @@ static int syswatch_wdt_startup(void)
     return RT_EOK;
 }
 
-static void syswatch_wdt_feed(void)
+void syswatch_wdt_feed(void)
 {
     rt_device_control(sw_data.wdt, RT_DEVICE_CTRL_WDT_KEEPALIVE, RT_NULL);
 }
